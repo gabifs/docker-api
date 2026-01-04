@@ -1,4 +1,6 @@
-FROM node:18-alpine as build
+FROM node:18-alpine as base
+
+FROM base as build
 
 WORKDIR /usr/src/app
 
@@ -11,7 +13,7 @@ COPY . .
 RUN npm run build
 RUN npm install --production
 
-FROM node:18-alpine
+FROM base as release
 
 WORKDIR /usr/src/app
 
